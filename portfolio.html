@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashmita Das</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── TOKENS ───────────────────────────────────────────────── */
+    :root {
+      --ink:        #1A1208;
+      --brown:      #5C3D1E;
+      --brown-soft: #A07850;
+      --rule:       #D4C4B0;
+      --bg:         #FAFAF7;
+      --white:      #FFFFFF;
+
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --body:    'DM Sans', system-ui, sans-serif;
+
+      --max: 720px;
+      --gap: 88px;
+    }
+
+    /* ── RESET ────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    /* ── NAV ──────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,250,247,0.93);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 28px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 18px;
+      font-style: italic;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brown-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* Mobile menu */
+    .menu-btn {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      flex-direction: column; gap: 5px; padding: 4px;
+    }
+    .menu-btn span {
+      display: block; width: 20px; height: 1.5px;
+      background: var(--ink); border-radius: 1px;
+    }
+
+    /* ── LAYOUT ───────────────────────────────────────────────── */
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ── HERO ─────────────────────────────────────────────────── */
+    .hero {
+      padding-top: 140px;
+      padding-bottom: 80px;
+    }
+    /* The SIGNATURE ELEMENT: a large ghosted letter "A" behind the name */
+    .hero-canvas {
+      position: relative;
+      display: inline-block;
+    }
+    .hero-ghost {
+      position: absolute;
+      top: -30px; left: -18px;
+      font-family: var(--display);
+      font-size: clamp(120px, 22vw, 190px);
+      font-style: italic;
+      font-weight: 600;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--rule);
+      line-height: 1;
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-name {
+      position: relative;
+      z-index: 1;
+      font-family: var(--display);
+      font-size: clamp(44px, 9vw, 76px);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+    .hero-subtitle {
+      margin-top: 18px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brown-soft);
+    }
+
+    /* ── SECTION STRUCTURE ────────────────────────────────────── */
+    .block {
+      padding: var(--gap) 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    /* The question header: large italic serif */
+    .q-head {
+      font-family: var(--display);
+      font-size: clamp(22px, 4vw, 30px);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 28px;
+      line-height: 1.2;
+    }
+
+    /* Body copy */
+    .body-copy {
+      font-size: 15px;
+      line-height: 1.9;
+      color: #3A2E22;
+      max-width: 620px;
+    }
+
+    /* Inline link style */
+    .body-copy a {
+      color: var(--brown);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--rule);
+      transition: text-decoration-color 0.2s;
+    }
+    .body-copy a:hover {
+      text-decoration-color: var(--brown);
+    }
+
+    /* ── QUOTES SECTION ───────────────────────────────────────── */
+    .quotes-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 44px;
+    }
+
+    .quote-item {
+      border-left: 2px solid var(--brown-soft);
+      padding-left: 24px;
+    }
+
+    .quote-text {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: clamp(17px, 2.5vw, 21px);
+      color: var(--ink);
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+
+    .quote-attr {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brown-soft);
+    }
+
+    /* ── CONNECT SECTION ──────────────────────────────────────── */
+    .connect-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    .connect-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .connect-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brown-soft);
+      width: 60px;
+      flex-shrink: 0;
+    }
+
+    .connect-val {
+      font-size: 15px;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .connect-val:hover {
+      color: var(--brown);
+      border-color: var(--brown);
+    }
+
+    /* ── FOOTER ───────────────────────────────────────────────── */
+    footer {
+      padding: 36px 0 40px;
+      border-top: 1px solid var(--rule);
+    }
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .footer-name {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--brown-soft);
+    }
+    .footer-note {
+      font-size: 12px;
+      color: var(--rule);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── SCROLL REVEAL ────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 54px; left: 0; right: 0;
+        background: var(--bg);
+        flex-direction: column;
+        gap: 0;
+        border-bottom: 1px solid var(--rule);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li a {
+        display: block;
+        padding: 14px 28px;
+        border-bottom: 1px solid var(--rule);
+      }
+      .menu-btn { display: flex; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">Ashmita Das</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#who">Who</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#made">Made of</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#now">Now</a></li>
+      <li><a href="#speaks">Speaks to</a></li>
+      <li><a href="#connect">Connect</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="hero-canvas">
+      <span class="hero-ghost" aria-hidden="true">A</span>
+      <h1 class="hero-name">Ashmita<br/>Das</h1>
+    </div>
+    <p class="hero-subtitle">English Major &nbsp;·&nbsp; MBA Aspirant &nbsp;·&nbsp; Kolkata</p>
+  </div>
+</section>
+
+<!-- WHO AM I? -->
+<section class="block" id="who">
+  <div class="wrap">
+    <h2 class="q-head reveal">Who am I?</h2>
+    <p class="body-copy reveal">
+      I'm an English major turned MBA aspirant from Kolkata that lives her life with creativity and freedom. Since childhood, I've been very into voice acting and undertaken a few passion projects of the same. I love working with people and thrive in social settings and contexts. Versatility is what I'm good at, and I'm excited to work on varied projects of many kinds as they provide for valuable learning opportunities.
+      <a href="#connect">Excited to hear from you!</a>
+    </p>
+  </div>
+</section>
+
+<!-- HOW DID I GET HERE? -->
+<section class="block" id="journey">
+  <div class="wrap">
+    <h2 class="q-head reveal">How did I get here?</h2>
+    <p class="body-copy reveal">
+      I graduated high school in 2022 from Garden High School, and went on to pursue a three-year English honours degree from The Bhawanipur Education Society College the same year in my hometown. I am currently pursuing an MBA from the Xaviers' Institute of Management, and am based in Bhubaneswar.
+    </p>
+  </div>
+</section>
+
+<!-- WHAT MADE ME? -->
+<section class="block" id="made">
+  <div class="wrap">
+    <h2 class="q-head reveal">What made me?</h2>
+    <p class="body-copy reveal">
+      Since childhood, I've been passionate about voice acting and have undertaken a few personal projects to voice my favourite characters from anime and animated films. I am an aspiring actor, and have starred in four theatrical productions during my undergraduate years. I am an avid reader and enjoy unwinding with Japanese classics and modern poetry. Occasionally, I challenge myself with a sudoku puzzle and as a reward, treat myself to the recipes I like to experiment with.
+    </p>
+  </div>
+</section>
+
+<!-- WHAT CAN I DO? -->
+<section class="block" id="skills">
+  <div class="wrap">
+    <h2 class="q-head reveal">What can I do?</h2>
+    <p class="body-copy reveal">
+      I enjoy working in group settings where structured collaboration is a must for meaningful outcomes, and my theatre background helps me with public speaking and teamwork. Event coordination is one of my strong suits, having planned and organized many departmental and college events during my time at BESC. I am comfortable with both qualitative and quantitative research, and have experience working on academic research papers and statistical data.
+    </p>
+  </div>
+</section>
+
+<!-- WHAT AM I WORKING ON? -->
+<section class="block" id="now">
+  <div class="wrap">
+    <h2 class="q-head reveal">What am I working on?</h2>
+    <p class="body-copy reveal">
+      Case studies is something I've always been fascinated by — understanding their nuances by reading and uncovering the fine print, and attempting to formulate strategies to analyse and approach a problem with is something that deeply interests me. I am working on sharpening my analytical approach for cases while upgrading my technical knowledge through certain additional coursework.
+    </p>
+  </div>
+</section>
+
+<!-- WHAT SPEAKS TO ME? -->
+<section class="block" id="speaks">
+  <div class="wrap">
+    <h2 class="q-head reveal">What speaks to me?</h2>
+    <div class="quotes-stack">
+
+      <blockquote class="quote-item reveal">
+        <p class="quote-text">"You rounded me from a person into love"</p>
+        <cite class="quote-attr">— Kim Namjoon</cite>
+      </blockquote>
+
+      <blockquote class="quote-item reveal">
+        <p class="quote-text">"...years of love have been forgot in the hatred of a minute"</p>
+        <cite class="quote-attr">— Edgar Allan Poe</cite>
+      </blockquote>
+
+      <blockquote class="quote-item reveal">
+        <p class="quote-text">"Then it came to me, my little life. I remembered my life. The way an axe handle, mid-swing, remembers the tree. And I was free"</p>
+        <cite class="quote-attr">— Ocean Vuong</cite>
+      </blockquote>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT WITH ME -->
+<section class="block" id="connect">
+  <div class="wrap">
+    <h2 class="q-head reveal">Connect with me</h2>
+    <div class="connect-links reveal">
+
+      <div class="connect-row">
+        <span class="connect-label">Email</span>
+        <a class="connect-val" href="mailto:ashmitaizme1@gmail.com">ashmitaizme1@gmail.com</a>
+      </div>
+
+      <div class="connect-row">
+        <span class="connect-label">Mobile</span>
+        <a class="connect-val" href="tel:+919051574114">+91 90515 74114</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-name">Ashmita Das</span>
+    <span class="footer-note">Kolkata &nbsp;·&nbsp; Bhubaneswar</span>
+  </div>
+</footer>
+
+<script>
+  /* Mobile menu toggle */
+  const btn   = document.getElementById('menuBtn');
+  const links = document.getElementById('navLinks');
+  btn.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  /* Scroll reveal */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
