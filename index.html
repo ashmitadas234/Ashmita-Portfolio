@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashmita Das — Portfolio</title>
+  <meta name="description" content="Personal portfolio of Ashmita Das — English major turned MBA aspirant, voice actor, and aspiring performer from Kolkata." />
+
+  <!-- Fonts: a serif for headings, a clean sans for body text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       COLOR TOKENS
+       Palette requested by Ashmita:
+       - Sage green        (Pantone 421C)   #989C97-ish -> using accurate value
+       - Dusty blush pink  (Pantone 7604C)
+       - Soft off-white    (Cool Gray 1C)
+       - Charcoal grey      (Warm Gray 11C)
+       ============================================================ */
+    :root {
+      --sage: #a3b1a4;          /* sage green accent */
+      --sage-deep: #7e8d80;     /* deeper sage for hovers/borders */
+      --blush: #e0bcb8;         /* dusty blush pink accent */
+      --offwhite: #e9e8e3;      /* soft off-white background (Cool Gray 1C) */
+      --charcoal: #4a4640;      /* charcoal / warm grey text (Warm Gray 11C) */
+      --charcoal-soft: #6c665e; /* muted body text */
+      --radius: 14px;
+    }
+
+    /* ============================================================
+       BASE / RESET
+       ============================================================ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; background-color: var(--offwhite); }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: var(--offwhite);
+      color: var(--charcoal);
+      line-height: 1.7;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, .serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 500;
+      color: var(--charcoal);
+      line-height: 1.2;
+    }
+
+    /* ============================================================
+       NAVBAR — sticky top navigation
+       ============================================================ */
+    header.nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: rgba(233, 232, 227, 0.88);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(126, 141, 128, 0.25);
+    }
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--charcoal);
+    }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--charcoal-soft);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--sage-deep); }
+
+    /* ============================================================
+       LAYOUT HELPERS
+       ============================================================ */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 5rem 0; }
+    .section-label {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--sage-deep);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+    h2.section-title { font-size: 2.5rem; margin-bottom: 1.5rem; }
+    .prose { max-width: 760px; font-size: 1.075rem; color: var(--charcoal-soft); }
+    .prose p + p { margin-top: 1rem; }
+
+    /* ============================================================
+       HERO — intro / "Who am I?"
+       ============================================================ */
+    .hero {
+      background: linear-gradient(180deg, var(--offwhite) 0%, #efe7e4 100%);
+      padding: 6rem 0 5rem;
+    }
+    .hero h1 { font-size: 3.5rem; margin-bottom: 1.25rem; }
+    .hero .accent-bar {
+      width: 60px; height: 4px;
+      background-color: var(--blush);
+      border-radius: 999px;
+      margin-bottom: 1.75rem;
+    }
+    .hero .prose { font-size: 1.15rem; }
+    /* The hyperlink that jumps to the "Connect with me" section */
+    .hero a.inline-link {
+      color: var(--sage-deep);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--blush);
+    }
+    .hero a.inline-link:hover { color: var(--charcoal); }
+
+    /* ============================================================
+       ALTERNATING SECTION BACKGROUNDS
+       ============================================================ */
+    .tint-sage { background-color: rgba(163, 177, 164, 0.18); }
+    .tint-blush { background-color: rgba(224, 188, 184, 0.20); }
+
+    /* ============================================================
+       CARD GRID — used for "What can I do?"
+       ============================================================ */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    @media (min-width: 720px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+    .card {
+      background-color: var(--offwhite);
+      border: 1px solid rgba(126, 141, 128, 0.3);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+    .card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .card p { color: var(--charcoal-soft); font-size: 0.98rem; }
+
+    /* ============================================================
+       QUOTES — favorite lines / "What am I working on?"
+       ============================================================ */
+    .quotes { display: grid; gap: 1.5rem; margin-top: 2rem; }
+    blockquote {
+      border-left: 4px solid var(--sage);
+      padding: 1rem 1.5rem;
+      background-color: var(--offwhite);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-style: italic;
+      color: var(--charcoal);
+    }
+    blockquote cite {
+      display: block;
+      margin-top: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--sage-deep);
+      font-weight: 600;
+    }
+
+    /* ============================================================
+       CONNECT — contact section
+       ============================================================ */
+    .connect { text-align: center; }
+    .connect .prose { margin: 0 auto 2rem; }
+    .contact-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .contact-card {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      background-color: var(--offwhite);
+      border: 1px solid rgba(126, 141, 128, 0.35);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      min-width: 240px;
+      text-decoration: none;
+      color: var(--charcoal);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .contact-card:hover { transform: translateY(-3px); border-color: var(--sage-deep); }
+    .contact-card .label {
+      font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--sage-deep); font-weight: 600;
+    }
+    .contact-card .value { font-size: 1.1rem; font-weight: 500; }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    footer {
+      background-color: var(--charcoal);
+      color: var(--offwhite);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="nav">
+    <div class="nav-inner">
+      <span class="brand">Ashmita Das</span>
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="#about">Who am I?</a></li>
+          <li><a href="#journey">How I got here</a></li>
+          <li><a href="#made-me">What made me</a></li>
+          <li><a href="#skills">What I can do</a></li>
+          <li><a href="#working-on">What I'm working on</a></li>
+          <li><a href="#connect">Connect</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== HERO / WHO AM I? ===================== -->
+  <main>
+    <section id="about" class="hero">
+      <div class="container">
+        <span class="section-label">Who am I?</span>
+        <h1>English major turned MBA aspirant.</h1>
+        <div class="accent-bar"></div>
+        <div class="prose">
+          <p>
+            I&apos;m an English major turned MBA aspirant from Kolkata that lives her life with
+            creativity and freedom. Since childhood, I&apos;ve been very into voice acting and
+            undertaken a few passion projects of the same. I love working with people and thrive
+            in social settings and contexts.
+          </p>
+          <p>
+            Versatility is what I&apos;m good at, and I&apos;m excited to work on varied projects of
+            many kinds as they provide for valuable learning opportunities.
+            <!-- Hyperlink jumps directly to the "Connect with me" section -->
+            <a class="inline-link" href="#connect">Excited to hear from you!</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== HOW DID I GET HERE? ===================== -->
+    <section id="journey">
+      <div class="container">
+        <span class="section-label">How did I get here?</span>
+        <h2 class="section-title">A path through words and stages.</h2>
+        <div class="prose">
+          <p>
+            I graduated high school in 2022 from Garden High School, and went on to pursue a
+            three-year English honours degree from The Bhawanipur Education Society College the
+            same year in my hometown.
+          </p>
+          <p>
+            I am currently pursuing an MBA from the Xaviers&apos; Institute of Management, and am
+            based in Bhubaneswar.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== WHAT MADE ME? ===================== -->
+    <section id="made-me" class="tint-sage">
+      <div class="container">
+        <span class="section-label">What made me?</span>
+        <h2 class="section-title">Voices, stages, and quiet pages.</h2>
+        <div class="prose">
+          <p>
+            Since childhood, I&apos;ve been passionate about voice acting and have undertaken a few
+            personal projects to voice my favourite characters from anime and animated films. I am
+            an aspiring actor, and have starred in four theatrical productions during my
+            undergraduate years.
+          </p>
+          <p>
+            I am an avid reader and enjoy unwinding with Japanese classics and modern poetry.
+            Occasionally, I challenge myself with a sudoku puzzle and as a reward, treat myself to
+            the recipes I like to experiment with.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== WHAT CAN I DO? ===================== -->
+    <section id="skills">
+      <div class="container">
+        <span class="section-label">What can I do?</span>
+        <h2 class="section-title">Where I bring value.</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>Collaboration</h3>
+            <p>
+              I enjoy working in group settings where structured collaboration is a must for
+              meaningful outcomes. My theatre background helps me with public speaking and teamwork.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Event Coordination</h3>
+            <p>
+              Event coordination is one of my strong suits — I planned and organized many
+              departmental and college events during my time at BESC.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Research</h3>
+            <p>
+              I am comfortable with both qualitative and quantitative research, with experience
+              working on academic research papers and statistical data.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== WHAT AM I WORKING ON? ===================== -->
+    <section id="working-on" class="tint-blush">
+      <div class="container">
+        <span class="section-label">What am I working on?</span>
+        <h2 class="section-title">Case studies & the lines I live by.</h2>
+        <div class="prose">
+          <p>
+            Case studies are something I&apos;ve always been fascinated by — understanding their
+            nuances by reading and uncovering the fine print, and attempting to draw out the human
+            story behind the numbers. Alongside my studies, here are a few lines that have shaped
+            the way I see the world:
+          </p>
+        </div>
+
+        <!-- Favorite quotes -->
+        <div class="quotes">
+          <blockquote>
+            &ldquo;...years of love have been forgot in the hatred of a minute.&rdquo;
+            <cite>Kim Namjoon</cite>
+          </blockquote>
+          <blockquote>
+            &ldquo;Then it came to me, my little life. I remembered my life. The way an axe handle,
+            mid-swing, remembers the tree. And I was free.&rdquo;
+            <cite>Edgar Allan Poe</cite>
+          </blockquote>
+          <blockquote>
+            &ldquo;A line of poetry, held close, can carry you across years.&rdquo;
+            <cite>Ocean Vuong</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONNECT WITH ME ===================== -->
+    <section id="connect" class="connect">
+      <div class="container">
+        <span class="section-label">Connect with me</span>
+        <h2 class="section-title">Let&apos;s create something together.</h2>
+        <div class="prose">
+          <p>I&apos;d love to hear about projects, collaborations, or just a good story.</p>
+        </div>
+        <div class="contact-cards">
+          <a class="contact-card" href="mailto:ashmitaizme1@gmail.com">
+            <span class="label">Email</span>
+            <span class="value">ashmitaizme1@gmail.com</span>
+          </a>
+          <a class="contact-card" href="tel:+919051574114">
+            <span class="label">Mobile</span>
+            <span class="value">(091) 9051574114</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <p>&copy; <span id="year"></span> Ashmita Das — Built with creativity &amp; freedom.</p>
+  </footer>
+
+  <!-- ===================== JAVASCRIPT ===================== -->
+  <script>
+    // Insert the current year into the footer automatically.
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth-scroll for in-page anchor links (graceful enhancement
+    // on top of CSS scroll-behavior, with a small offset for the sticky nav).
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          var top = target.getBoundingClientRect().top + window.pageYOffset - 70;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
