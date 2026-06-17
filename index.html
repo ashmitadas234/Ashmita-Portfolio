@@ -9,45 +9,46 @@
   <!-- Fonts: a serif for headings, a clean sans for body text -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
     /* ============================================================
-       COLOR TOKENS
-       Palette requested by Ashmita:
-       - Sage green        (Pantone 421C)   #989C97-ish -> using accurate value
-       - Dusty blush pink  (Pantone 7604C)
-       - Soft off-white    (Cool Gray 1C)
-       - Charcoal grey      (Warm Gray 11C)
+       COLOR TOKENS — brighter, airier take on the palette
+       - Sage green        (lifted, fresher)
+       - Dusty blush pink  (brighter, warmer)
+       - Soft off-white    (near-white cream base)
+       - Charcoal grey      (text)
        ============================================================ */
     :root {
-      --sage: #a3b1a4;          /* sage green accent */
-      --sage-deep: #7e8d80;     /* deeper sage for hovers/borders */
-      --blush: #e0bcb8;         /* dusty blush pink accent */
-      --offwhite: #e9e8e3;      /* soft off-white background (Cool Gray 1C) */
-      --charcoal: #4a4640;      /* charcoal / warm grey text (Warm Gray 11C) */
-      --charcoal-soft: #6c665e; /* muted body text */
-      --radius: 14px;
+      --sage: #b7c8b6;          /* brighter sage green accent */
+      --sage-deep: #6f8a72;     /* deeper sage for text/borders */
+      --blush: #f1c9c6;         /* brighter dusty blush pink */
+      --blush-deep: #d99a95;    /* deeper blush for accents */
+      --cream: #fbf9f4;         /* bright near-white background */
+      --cream-warm: #f6efe7;    /* warm tint for hero/blocks */
+      --charcoal: #423f3a;      /* charcoal text */
+      --charcoal-soft: #6f6960; /* muted body text */
+      --radius: 16px;
     }
 
     /* ============================================================
        BASE / RESET
        ============================================================ */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; background-color: var(--offwhite); }
+    html { scroll-behavior: smooth; background-color: var(--cream); }
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background-color: var(--offwhite);
+      background-color: var(--cream);
       color: var(--charcoal);
-      line-height: 1.7;
+      line-height: 1.75;
       font-weight: 400;
       -webkit-font-smoothing: antialiased;
     }
     h1, h2, h3, .serif {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--charcoal);
-      line-height: 1.2;
+      line-height: 1.15;
     }
 
     /* ============================================================
@@ -57,9 +58,9 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background-color: rgba(233, 232, 227, 0.88);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(126, 141, 128, 0.25);
+      background-color: rgba(251, 249, 244, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(111, 138, 114, 0.18);
     }
     .nav-inner {
       max-width: 1080px;
@@ -72,8 +73,8 @@
     }
     .brand {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 600;
+      font-size: 1.6rem;
+      font-weight: 700;
       letter-spacing: 0.5px;
       color: var(--charcoal);
     }
@@ -96,18 +97,22 @@
        LAYOUT HELPERS
        ============================================================ */
     .container { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
-    section { padding: 5rem 0; }
-    .section-label {
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--sage-deep);
-      margin-bottom: 0.75rem;
-      font-weight: 600;
+    section { padding: 5.5rem 0; }
+    /* Section name doubles as the header — straight into the body after it */
+    h2.section-title {
+      font-size: 2.75rem;
+      margin-bottom: 1.75rem;
+      color: var(--charcoal);
     }
-    h2.section-title { font-size: 2.5rem; margin-bottom: 1.5rem; }
+    h2.section-title::after {
+      content: "";
+      display: block;
+      width: 52px;
+      height: 3px;
+      margin-top: 0.85rem;
+      background-color: var(--blush);
+      border-radius: 999px;
+    }
     .prose { max-width: 760px; font-size: 1.075rem; color: var(--charcoal-soft); }
     .prose p + p { margin-top: 1rem; }
 
@@ -115,32 +120,35 @@
        HERO — intro / "Who am I?"
        ============================================================ */
     .hero {
-      background: linear-gradient(180deg, var(--offwhite) 0%, #efe7e4 100%);
-      padding: 6rem 0 5rem;
+      background: linear-gradient(160deg, var(--cream) 0%, var(--cream-warm) 55%, #f3ece9 100%);
+      padding: 6.5rem 0 6rem;
     }
-    .hero h1 { font-size: 3.5rem; margin-bottom: 1.25rem; }
-    .hero .accent-bar {
-      width: 60px; height: 4px;
+    .hero h1 { font-size: 4rem; margin-bottom: 1.75rem; }
+    .hero h1::after {
+      content: "";
+      display: block;
+      width: 64px;
+      height: 4px;
+      margin-top: 1.25rem;
       background-color: var(--blush);
       border-radius: 999px;
-      margin-bottom: 1.75rem;
     }
-    .hero .prose { font-size: 1.15rem; }
+    .hero .prose { font-size: 1.18rem; }
     /* The hyperlink that jumps to the "Connect with me" section */
     .hero a.inline-link {
       color: var(--sage-deep);
       font-weight: 600;
       text-decoration: underline;
       text-underline-offset: 3px;
-      text-decoration-color: var(--blush);
+      text-decoration-color: var(--blush-deep);
     }
     .hero a.inline-link:hover { color: var(--charcoal); }
 
     /* ============================================================
-       ALTERNATING SECTION BACKGROUNDS
+       ALTERNATING SECTION BACKGROUNDS — brighter tints
        ============================================================ */
-    .tint-sage { background-color: rgba(163, 177, 164, 0.18); }
-    .tint-blush { background-color: rgba(224, 188, 184, 0.20); }
+    .tint-sage { background-color: rgba(183, 200, 182, 0.22); }
+    .tint-blush { background-color: rgba(241, 201, 198, 0.25); }
 
     /* ============================================================
        CARD GRID — used for "What can I do?"
@@ -149,35 +157,42 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 1.25rem;
-      margin-top: 2rem;
+      margin-top: 2.25rem;
     }
     @media (min-width: 720px) { .grid { grid-template-columns: repeat(3, 1fr); } }
     .card {
-      background-color: var(--offwhite);
-      border: 1px solid rgba(126, 141, 128, 0.3);
+      background-color: #ffffff;
+      border: 1px solid rgba(111, 138, 114, 0.22);
       border-radius: var(--radius);
-      padding: 1.75rem;
+      padding: 1.85rem;
+      box-shadow: 0 10px 30px -18px rgba(66, 63, 58, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px -20px rgba(66, 63, 58, 0.35);
+    }
+    .card h3 { font-size: 1.6rem; margin-bottom: 0.5rem; }
     .card p { color: var(--charcoal-soft); font-size: 0.98rem; }
 
     /* ============================================================
-       QUOTES — favorite lines / "What am I working on?"
+       QUOTES — favorite lines
        ============================================================ */
-    .quotes { display: grid; gap: 1.5rem; margin-top: 2rem; }
+    .quotes { display: grid; gap: 1.5rem; margin-top: 2.25rem; }
     blockquote {
       border-left: 4px solid var(--sage);
-      padding: 1rem 1.5rem;
-      background-color: var(--offwhite);
+      padding: 1.25rem 1.75rem;
+      background-color: #ffffff;
       border-radius: 0 var(--radius) var(--radius) 0;
+      box-shadow: 0 10px 30px -20px rgba(66, 63, 58, 0.3);
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
+      font-size: 1.45rem;
       font-style: italic;
       color: var(--charcoal);
     }
     blockquote cite {
       display: block;
-      margin-top: 0.5rem;
+      margin-top: 0.6rem;
       font-family: 'Inter', sans-serif;
       font-style: normal;
       font-size: 0.85rem;
@@ -203,13 +218,14 @@
       flex-direction: column;
       align-items: center;
       gap: 0.25rem;
-      background-color: var(--offwhite);
-      border: 1px solid rgba(126, 141, 128, 0.35);
+      background-color: #ffffff;
+      border: 1px solid rgba(111, 138, 114, 0.28);
       border-radius: var(--radius);
       padding: 1.5rem 2rem;
       min-width: 240px;
       text-decoration: none;
       color: var(--charcoal);
+      box-shadow: 0 10px 30px -20px rgba(66, 63, 58, 0.3);
       transition: transform 0.2s ease, border-color 0.2s ease;
     }
     .contact-card:hover { transform: translateY(-3px); border-color: var(--sage-deep); }
@@ -224,7 +240,7 @@
        ============================================================ */
     footer {
       background-color: var(--charcoal);
-      color: var(--offwhite);
+      color: var(--cream);
       text-align: center;
       padding: 2rem 1.5rem;
       font-size: 0.9rem;
@@ -255,9 +271,7 @@
   <main>
     <section id="about" class="hero">
       <div class="container">
-        <span class="section-label">Who am I?</span>
-        <h1>English major turned MBA aspirant.</h1>
-        <div class="accent-bar"></div>
+        <h1>Who am I?</h1>
         <div class="prose">
           <p>
             I&apos;m an English major turned MBA aspirant from Kolkata that lives her life with
@@ -278,8 +292,7 @@
     <!-- ===================== HOW DID I GET HERE? ===================== -->
     <section id="journey">
       <div class="container">
-        <span class="section-label">How did I get here?</span>
-        <h2 class="section-title">A path through words and stages.</h2>
+        <h2 class="section-title">How did I get here?</h2>
         <div class="prose">
           <p>
             I graduated high school in 2022 from Garden High School, and went on to pursue a
@@ -297,8 +310,7 @@
     <!-- ===================== WHAT MADE ME? ===================== -->
     <section id="made-me" class="tint-sage">
       <div class="container">
-        <span class="section-label">What made me?</span>
-        <h2 class="section-title">Voices, stages, and quiet pages.</h2>
+        <h2 class="section-title">What made me?</h2>
         <div class="prose">
           <p>
             Since childhood, I&apos;ve been passionate about voice acting and have undertaken a few
@@ -318,8 +330,7 @@
     <!-- ===================== WHAT CAN I DO? ===================== -->
     <section id="skills">
       <div class="container">
-        <span class="section-label">What can I do?</span>
-        <h2 class="section-title">Where I bring value.</h2>
+        <h2 class="section-title">What can I do?</h2>
         <div class="grid">
           <article class="card">
             <h3>Collaboration</h3>
@@ -349,8 +360,7 @@
     <!-- ===================== WHAT AM I WORKING ON? ===================== -->
     <section id="working-on" class="tint-blush">
       <div class="container">
-        <span class="section-label">What am I working on?</span>
-        <h2 class="section-title">Case studies & the lines I live by.</h2>
+        <h2 class="section-title">What am I working on?</h2>
         <div class="prose">
           <p>
             Case studies are something I&apos;ve always been fascinated by — understanding their
@@ -363,16 +373,16 @@
         <!-- Favorite quotes -->
         <div class="quotes">
           <blockquote>
-            &ldquo;...years of love have been forgot in the hatred of a minute.&rdquo;
+            &ldquo;You rounded me from a person into love&rdquo;
             <cite>Kim Namjoon</cite>
+          </blockquote>
+          <blockquote>
+            &ldquo;...years of love have been forgot in the hatred of a minute&rdquo;
+            <cite>Edgar Allan Poe</cite>
           </blockquote>
           <blockquote>
             &ldquo;Then it came to me, my little life. I remembered my life. The way an axe handle,
             mid-swing, remembers the tree. And I was free.&rdquo;
-            <cite>Edgar Allan Poe</cite>
-          </blockquote>
-          <blockquote>
-            &ldquo;A line of poetry, held close, can carry you across years.&rdquo;
             <cite>Ocean Vuong</cite>
           </blockquote>
         </div>
@@ -382,8 +392,7 @@
     <!-- ===================== CONNECT WITH ME ===================== -->
     <section id="connect" class="connect">
       <div class="container">
-        <span class="section-label">Connect with me</span>
-        <h2 class="section-title">Let&apos;s create something together.</h2>
+        <h2 class="section-title" style="display:inline-block;">Connect with me</h2>
         <div class="prose">
           <p>I&apos;d love to hear about projects, collaborations, or just a good story.</p>
         </div>
