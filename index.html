@@ -167,6 +167,23 @@
     }
 
     /* ============================================================
+       SCROLL REVEAL — sections fade + rise into view
+       ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ============================================================
        HERO — intro / "Who am I?"
        ============================================================ */
     .hero {
@@ -325,7 +342,7 @@
     </section>
 
     <!-- ===================== HERO / WHO AM I? ===================== -->
-    <section id="about" class="hero">
+    <section id="about" class="hero reveal">
       <div class="container">
         <h1>Who am I?</h1>
         <div class="prose">
@@ -346,7 +363,7 @@
     </section>
 
     <!-- ===================== HOW DID I GET HERE? ===================== -->
-    <section id="journey">
+    <section id="journey" class="reveal">
       <div class="container">
         <h2 class="section-title">How did I get here?</h2>
         <div class="prose">
@@ -364,7 +381,7 @@
     </section>
 
     <!-- ===================== WHAT MADE ME? ===================== -->
-    <section id="made-me" class="tint-sage">
+    <section id="made-me" class="tint-sage reveal">
       <div class="container">
         <h2 class="section-title">What made me?</h2>
         <div class="prose">
@@ -384,7 +401,7 @@
     </section>
 
     <!-- ===================== WHAT CAN I DO? ===================== -->
-    <section id="skills">
+    <section id="skills" class="reveal">
       <div class="container">
         <h2 class="section-title">What can I do?</h2>
         <div class="grid">
@@ -414,7 +431,7 @@
     </section>
 
     <!-- ===================== WHAT AM I WORKING ON? ===================== -->
-    <section id="working-on" class="tint-blush">
+    <section id="working-on" class="tint-blush reveal">
       <div class="container">
         <h2 class="section-title">What am I working on?</h2>
         <div class="prose">
@@ -446,7 +463,7 @@
     </section>
 
     <!-- ===================== CONNECT WITH ME ===================== -->
-    <section id="connect" class="connect">
+    <section id="connect" class="connect reveal">
       <div class="container">
         <h2 class="section-title" style="display:inline-block;">Connect with me</h2>
         <div class="prose">
@@ -488,6 +505,24 @@
         }
       });
     });
+
+    // Scroll reveal: each .reveal section fades + rises into view as it
+    // enters the viewport, using an IntersectionObserver.
+    var revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+      revealEls.forEach(function (el) { observer.observe(el); });
+    } else {
+      // Fallback: show everything if the API isn't supported.
+      revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+    }
   </script>
 </body>
 </html>
