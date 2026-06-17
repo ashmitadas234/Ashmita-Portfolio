@@ -117,6 +117,56 @@
     .prose p + p { margin-top: 1rem; }
 
     /* ============================================================
+       INTRO BANNER — big italic "Hi!" + ribbon of section headers
+       ============================================================ */
+    .intro {
+      background: linear-gradient(160deg, var(--cream) 0%, var(--cream-warm) 100%);
+      padding: 5rem 0 0;
+      text-align: center;
+    }
+    .intro .hi {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 5.5rem;
+      color: var(--charcoal);
+      line-height: 1;
+    }
+    /* Ribbon strip listing the section headers in small fonts */
+    .ribbon {
+      margin-top: 2.5rem;
+      background-color: var(--sage);
+      border-top: 1px solid rgba(111, 138, 114, 0.35);
+      border-bottom: 1px solid rgba(111, 138, 114, 0.35);
+    }
+    .ribbon ul {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem 1.4rem;
+    }
+    .ribbon a {
+      color: var(--charcoal);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+    .ribbon a:hover { color: var(--cream); }
+    .ribbon .sep { color: var(--sage-deep); font-size: 0.7rem; }
+    @media (max-width: 600px) {
+      .intro .hi { font-size: 4rem; }
+      .ribbon .sep { display: none; }
+    }
+
+    /* ============================================================
        HERO — intro / "Who am I?"
        ============================================================ */
     .hero {
@@ -267,8 +317,31 @@
     </div>
   </header>
 
-  <!-- ===================== HERO / WHO AM I? ===================== -->
+  <!-- ===================== INTRO BANNER: "Hi!" + RIBBON ===================== -->
   <main>
+    <section class="intro" aria-label="Introduction">
+      <div class="container">
+        <p class="hi">Hi!</p>
+      </div>
+      <!-- Ribbon listing the section headers in a small font -->
+      <nav class="ribbon" aria-label="Sections">
+        <ul>
+          <li><a href="#about">Who am I?</a></li>
+          <li class="sep">&bull;</li>
+          <li><a href="#journey">How did I get here?</a></li>
+          <li class="sep">&bull;</li>
+          <li><a href="#made-me">What made me?</a></li>
+          <li class="sep">&bull;</li>
+          <li><a href="#skills">What can I do?</a></li>
+          <li class="sep">&bull;</li>
+          <li><a href="#working-on">What am I working on?</a></li>
+          <li class="sep">&bull;</li>
+          <li><a href="#connect">Connect with me</a></li>
+        </ul>
+      </nav>
+    </section>
+
+    <!-- ===================== HERO / WHO AM I? ===================== -->
     <section id="about" class="hero">
       <div class="container">
         <h1>Who am I?</h1>
